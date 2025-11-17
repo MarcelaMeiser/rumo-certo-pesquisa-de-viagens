@@ -8,14 +8,10 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Serviço em memória para gerenciamento de voos.
- */
 public class VooService {
     private final List<Voo> voos = new ArrayList<>();
 
     public VooService() {
-        // Inicializa com 10 voos fictícios variados
         voos.add(new Voo("São Paulo", "Rio de Janeiro", LocalDate.of(2025, 6, 1), LocalTime.of(9, 30), 199.99, Duration.ofMinutes(50)));
         voos.add(new Voo("Belo Horizonte", "Salvador", LocalDate.of(2025, 6, 2), LocalTime.of(7, 15), 349.50, Duration.ofHours(2)));
         voos.add(new Voo("Curitiba", "Porto Alegre", LocalDate.of(2025, 6, 3), LocalTime.of(12, 0), 149.00, Duration.ofMinutes(55)));
@@ -117,8 +113,6 @@ public class VooService {
         quickSort(0, voos.size() - 1);
     }
 
-    // --- Métodos auxiliares ---
-
     private void swap(int i, int j) {
         Voo tmp = voos.get(i);
         voos.set(i, voos.get(j));
@@ -150,4 +144,3 @@ public class VooService {
         return i + 1;
     }
 }
-

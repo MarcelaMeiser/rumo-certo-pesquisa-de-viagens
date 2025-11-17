@@ -13,7 +13,6 @@ import java.util.List;
 @Controller
 public class VooController {
 
-    // Instância do service gerenciada pelo controller (permite reset)
     private VooService service = new VooService();
 
     /**

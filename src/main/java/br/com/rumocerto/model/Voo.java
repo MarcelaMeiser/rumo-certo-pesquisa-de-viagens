@@ -12,11 +12,9 @@ public class Voo {
     private double preco;
     private Duration duracao;
 
-    // Construtor sem argumentos
     public Voo() {
     }
 
-    // Construtor com todos os campos
     public Voo(String origem, String destino, LocalDate data, LocalTime horario, double preco, Duration duracao) {
         this.origem = origem;
         this.destino = destino;
