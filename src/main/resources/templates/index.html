@@ -1,78 +1,175 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Rumo Certo - Passagens Aéreas</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; }
-        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        h1 { color: #003366; text-align: center; margin-bottom: 30px; } /* Azul Marinho */
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f7f6;
+        margin: 0;
+        padding: 20px;
+      }
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #272912;
+        font-size: 33px;
+        text-align: center;
+        margin-bottom: 30px;
+      } /* Quase um verde, só que amarelado */
 
-        /* Área de Busca */
-        .search-box { display: flex; gap: 10px; justify-content: center; margin-bottom: 30px; background: #eef2f5; padding: 20px; border-radius: 8px; }
-        input { padding: 10px; border: 1px solid #ccc; border-radius: 4px; width: 200px; }
-        button { padding: 10px 20px; background-color: #003366; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
-        button:hover { background-color: #002244; }
-        a.btn-reset { padding: 10px 20px; background-color: #6c757d; color: white; text-decoration: none; border-radius: 4px; display: inline-block; }
+      /* Área de Busca */
+      .search-box {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin-bottom: 40px;
+        background: #eeeeee;
+        padding: 20px;
+        border-radius: 15px;
+      }
+      input {
+        padding: 9px;
+        border: 1px solid #cecdcd;
+        border-radius: 20px;
+        width: 270px;
+        font-size: 1em;
+        transition: all 0.2s;
+      }
+      input:hover {
+        border-color: #84866b;
+      }
+      button {
+        padding: 10px 15px;
+        background-color: #494d1c;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.4s;
+      }
+      button:hover {
+        background-color: #323513;
+      }
+      a.btn-reset {
+        padding: 10px 15px;
+        background-color: #84866b;
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+        display: inline-block;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.4s;
+      }
+      a.btn-reset:hover {
+        background-color: #6f7059;
+      }
 
-        /* Botões de Ordenação */
-        .sort-buttons { text-align: center; margin-bottom: 20px; }
-        .btn-sort { margin: 0 5px; text-decoration: none; color: #003366; border: 1px solid #003366; padding: 8px 15px; border-radius: 20px; font-size: 0.9em; transition: all 0.3s; }
-        .btn-sort:hover { background-color: #003366; color: white; }
+      /* Botões de Ordenação */
+      .sort-buttons {
+        text-align: center;
+        margin-bottom: 25px;
+      }
+      .btn-sort {
+        margin: 0 5px;
+        text-decoration: none;
+        color: #000000;
+        border: 1px solid #e7e7e7;
+        padding: 9px 15px;
+        border-radius: 20px;
+        font-size: 0.9em;
+        transition: all 0.3s;
+        font-weight: bold;
+      }
+      .btn-sort:hover {
+        background-color: #494d1c;
+        color: white;
+        border-color: #333614;
+      }
 
-        /* Tabela */
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th { background-color: #003366; color: white; padding: 12px; text-align: left; }
-        td { padding: 12px; border-bottom: 1px solid #ddd; color: #333; }
-        tr:hover { background-color: #f1f1f1; }
-        .price { color: #28a745; font-weight: bold; }
+      /* Tabela */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+      th {
+        background-color: #494d1c;
+        color: white;
+        padding: 12px;
+        text-align: left;
+      }
+      td {
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+        color: #333;
+      }
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+      .price {
+        color: #0f7729;
+        font-weight: bold;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <div class="container">
+      <h1>✈️ Rumo Certo</h1>
 
-<div class="container">
-    <h1>✈️ Rumo Certo</h1>
-
-    <form action="/buscar" method="get" class="search-box">
-        <input type="text" name="termo" placeholder="Origem ou Destino...">
+      <form action="/buscar" method="get" class="search-box">
+        <input type="text" name="termo" placeholder=" Origem ou Destino.. " />
         <button type="submit">Buscar</button>
         <a href="/resetar" class="btn-reset">Limpar</a>
-    </form>
+      </form>
 
-    <div class="sort-buttons">
-        <span>Ordenar por: </span>
+      <div class="sort-buttons">
+        <span style="color: #000000; font-size: 14px"> Ordenar por: </span>
         <a href="/ordenar/preco" class="btn-sort">💲 Preço (Bubble Sort)</a>
-        <a href="/ordenar/horario" class="btn-sort">⏰ Horário (Selection Sort)</a>
+        <a href="/ordenar/horario" class="btn-sort"
+          >⏰ Horário (Selection Sort)</a
+        >
         <a href="/ordenar/duracao" class="btn-sort">⏳ Duração (Quick Sort)</a>
-    </div>
+      </div>
 
-    <table>
+      <table>
         <thead>
-        <tr>
+          <tr>
             <th>Origem</th>
             <th>Destino</th>
             <th>Data</th>
             <th>Horário</th>
             <th>Duração</th>
             <th>Preço</th>
-        </tr>
+          </tr>
         </thead>
         <tbody>
-        <tr th:each="voo : ${voos}">
+          <tr th:each="voo : ${voos}">
             <td th:text="${voo.origem}">São Paulo</td>
             <td th:text="${voo.destino}">Rio de Janeiro</td>
             <td th:text="${voo.data}">2023-10-10</td>
             <td th:text="${voo.horario}">10:00</td>
             <td th:text="${voo.duracao}">1h 30m</td>
             <td class="price" th:text="'R$ ' + ${voo.preco}">R$ 250.00</td>
-        </tr>
+          </tr>
         </tbody>
-    </table>
+      </table>
 
-    <div th:if="${voos.empty}" style="text-align: center; margin-top: 20px; color: #666;">
+      <div
+        th:if="${voos.empty}"
+        style="text-align: center; margin-top: 20px; color: #7c7c7c"
+      >
         <p>Nenhum voo encontrado.</p>
+      </div>
     </div>
-</div>
-
-</body>
+  </body>
 </html>
